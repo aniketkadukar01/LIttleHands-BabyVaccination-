@@ -1,0 +1,6 @@
+@LittleHands_HostAddress = http://localhost:5022
+
+GET {{LittleHands_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
