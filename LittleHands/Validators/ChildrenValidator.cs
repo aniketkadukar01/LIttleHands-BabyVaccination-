@@ -1,12 +1,18 @@
 ﻿using FluentValidation;
+using LittleHands.Data;
 using LittleHands.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace LittleHands.Validators
 {
     public class ChildrenValidator : AbstractValidator<Children>
     {
-        public ChildrenValidator() 
+        private readonly LittleHandsContext _context;
+
+        public ChildrenValidator(LittleHandsContext context) 
         {
+            _context = context;
+
             RuleFor(c => c.DateOfBirth)
                 .NotEmpty().WithMessage("Date of Birth is required.")
                 .LessThan(DateOnly.FromDateTime(DateTime.Now.Date))
@@ -21,7 +27,17 @@ namespace LittleHands.Validators
                 .IsInEnum().WithMessage("Invalid blood type selected.");
 
             RuleFor(c => c.ParentId)
-                .NotEmpty().WithMessage("Parent ID is required.");
+                .NotEmpty().WithMessage("Parent ID is required.")
+                .MustAsync(ParentExists).WithMessage("Parent with the specified ID does not exist.");
+
+            RuleFor(c => c.Parent)
+                .NotNull().WithMessage("Parent is required.");
+
+        }
+
+        private async Task<bool> ParentExists(int parentId , CancellationToken cancellationToken)
+        {
+            return await _context.Users.AnyAsync(u => u.Id == parentId , cancellationToken);
         }
     }
 }
