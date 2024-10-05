@@ -10,8 +10,14 @@ namespace LittleHands.Validators
             RuleFor(a => a.ChildrenID)
                 .NotEmpty().WithMessage("Children Id is required.");
 
+            RuleFor(a => a.Children)
+                .NotNull().WithMessage("Children is required.");
+
             RuleFor(a => a.DoctorId)
                 .NotEmpty().WithMessage("Doctor Id is required.");
+
+            RuleFor(a => a.Doctor)
+                .NotNull().WithMessage("Doctor is required.");
 
             RuleFor(a => a.AppointmentDate)
                 .NotEmpty().WithMessage("AppointmentDate is required.")
@@ -27,6 +33,9 @@ namespace LittleHands.Validators
 
             RuleFor(a => a.VaccineId)
                 .NotEmpty().WithMessage("Vaccine Id is required.");
+
+            RuleFor(a => a.VaccineType)
+                .NotNull().WithMessage("VaccineType is required.");
         }
     }
 }

@@ -14,6 +14,9 @@ namespace LittleHands.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new UserConfig());
+            modelBuilder.ApplyConfiguration(new ChildrenConfig());
+            modelBuilder.ApplyConfiguration(new AppointmentConfig());
+            modelBuilder.ApplyConfiguration(new VaccineTypeConfig());
             base.OnModelCreating(modelBuilder);
         }
     }

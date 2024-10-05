@@ -8,7 +8,7 @@
         public int DoctorId { get; set; }
         public required User Doctor { get; set; }
         public DateOnly AppointmentDate { get; set; }
-        public DateTime AppointmentTime { get; set; }
+        public TimeOnly AppointmentTime { get; set; }
         public Status Status { get; set; }
         public int VaccineId { get; set; }
         public required VaccineType VaccineType { get; set; }
