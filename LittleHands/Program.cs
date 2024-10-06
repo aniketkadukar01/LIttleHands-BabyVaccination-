@@ -1,10 +1,12 @@
 using FluentValidation;
 using LittleHands.Data;
+using LittleHands.MIddleWareExtensions;
 using LittleHands.Validators;
 using Microsoft.EntityFrameworkCore;
 
 
 var builder = WebApplication.CreateBuilder(args);
+
 
 // Add services to the container.
 
@@ -29,6 +31,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseMiddleware<ExceptionHandlingMiddleWare>();
 
 app.UseHttpsRedirection();
 
