@@ -1,6 +1,8 @@
 using FluentValidation;
+using LittleHands.Configurations;
 using LittleHands.Data;
 using LittleHands.MIddleWareExtensions;
+using LittleHands.Repositories;
 using LittleHands.Validators;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,7 +12,11 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+builder.Services.AddAutoMapper(typeof(AutoMapperConfig));
+
 builder.Services.AddValidatorsFromAssemblyContaining(typeof(UserValidator));
+
+builder.Services.AddScoped(typeof(ILittleHandsRepo<>), typeof(LittleHandsRepoImpl<>));
 
 
 builder.Services.AddDbContext<LittleHandsContext>(options =>
