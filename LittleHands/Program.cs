@@ -14,7 +14,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddAutoMapper(typeof(AutoMapperConfig));
 
-builder.Services.AddValidatorsFromAssemblyContaining(typeof(UserValidator));
+builder.Services.AddValidatorsFromAssemblyContaining(typeof(UserDtoValidator));
 
 builder.Services.AddScoped(typeof(ILittleHandsRepo<>), typeof(LittleHandsRepoImpl<>));
 

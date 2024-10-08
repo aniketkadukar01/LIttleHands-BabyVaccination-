@@ -1,5 +1,7 @@
-﻿using LittleHands.Data;
+﻿using LittleHands.CustomHttpExceptions;
+using LittleHands.Data;
 using Microsoft.EntityFrameworkCore;
+using System.Net;
 
 namespace LittleHands.Repositories
 {
@@ -26,11 +28,16 @@ namespace LittleHands.Repositories
             var entity = await _dbset.FindAsync(id);
             if(entity == null)
             {
-                throw new KeyNotFoundException($"Entity with ID {id} not found.");
+                throw new CustomException(HttpStatusCode.NotFound, $"{id} is invalid id.");
             }
             _dbset.Remove(entity);
             await _context.SaveChangesAsync();
             return entity;
+        }
+
+        public async Task<List<T>> GetAllAsync()
+        {
+           return await _dbset.ToListAsync();
         }
 
         public async Task<T> GetByIdAsync(int id)
@@ -38,7 +45,7 @@ namespace LittleHands.Repositories
             var entity = await _dbset.FindAsync(id);
             if(entity == null)
             {
-                throw new KeyNotFoundException($"Entity with ID {id} not found.");
+                throw new CustomException(HttpStatusCode.NotFound , $"{id} is invalid id.");
             }
             return entity;
         }

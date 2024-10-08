@@ -1,16 +1,17 @@
 ﻿using FluentValidation;
 using LittleHands.Data;
+using LittleHands.DataModels;
 using LittleHands.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace LittleHands.Validators
 {
-    public class UserValidator : AbstractValidator<User>
+    public class UserDtoValidator : AbstractValidator<UserDto>
     {
 
         private readonly LittleHandsContext _context;
 
-        public UserValidator(LittleHandsContext context)
+        public UserDtoValidator(LittleHandsContext context)
         {
             _context = context;
 
